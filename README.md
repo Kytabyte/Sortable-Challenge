@@ -23,4 +23,8 @@ Through observing the first word of listings, we can see that there are a lot of
 
 ## 2. Cut Title of each listing
 
+There are some words or signs in the title of listings, after which the contents are not relevant to the products. For example, words after "for" are the uses of the products, instead of the products itself. If the product is a battery for a specific model of a camera, the information after "for" will become wrong information in matching. Therefore, words after the following keywords will be cut:
+{' for ', 'pour', ' with ', ' w/ ', ' + ', ' & '}
+
 ## 3. Check if exists any family and model matches the listing
+
