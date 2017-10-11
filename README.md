@@ -14,9 +14,9 @@ Detailed information about how I played around the data can be found in <code>So
 By observing the listings data <code>listings.txt</code>, we found out that most of the manufacturer information appeared in the first word of the title. Through checking the first word, we found that only around 3700 out of 20000 pieces of listings are not representing the manufacturer in <code>products.txt</code>. Therefore, for efficiency, we can extract the first word of each listings can match the manufacturer of the listings, such that we can save time from unnecessary matching work.
 
 
-### 1.1 Data Structure used for storing product data <code>products.txt</code> in Python
+### 1.1 Data Structure used for storing product data <code>products.txt</code> and <code>results.txt</code> in Python
 
-Since I first extract the manufacturer information from the listings and comparing the model/family in the next step, a dict was used, associated manufacturers as key, and a tuple of (family, model, product_name) as values. The reason I add product_name in the tuple is that the <code>results.txt</code> is a dict of product_name and Array of listings. Storing the product_name can simply find the correspodent item in results in constant time.
+<code>results</code> in Python was presented as a dict associated product_name as key and a list of listings as value. Since I first extract the manufacturer information from the listings and comparing the model/family in the next step, a dict was used, associated manufacturers as key, and a tuple of (family, model, product_name) as values. The reason I add product_name in the tuple is that the <code>results.txt</code> is a dict of product_name and Array of listings. Storing the product_name can simply find the correspodent item in results in constant time.
 
 ### 1.2 Skipped manufacturer
 
@@ -33,4 +33,9 @@ There are some words or signs in the title of listings, after which the contents
 
 ## 3. Check if exists any family and model matches the listing
 
-Since our aim is to reduce the false negative, we will do the exact match for family and model information provided in <code>product.txt</code>. 
+Since our aim is to reduce the false negative, we will do the exact match for family and model information provided in <code>product.txt</code>. For model information, we provided some flexibility (but very limited), as the format of a model may be interchangably used among "XXX123", "XXX 123", and "XXX-123". 
+
+My strategy for the matching is
+* If model gets exactly matched, directly add it into the result dict with the correspondent product_name key. 
+* If model is not matched, the listing must exactly match the family information, and match one of the model in the other two format.
+
