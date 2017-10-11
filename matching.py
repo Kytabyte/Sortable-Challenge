@@ -103,26 +103,17 @@ class Match(object):
 			else:
 				return []
 
-	# def score(self, tokenized_title, model):
-	# 	s = 0
-	# 	for keyword in model[0]:
-	# 		if keyword in tokenized_title:
-	# 			s += 1
-	# 		elif '-' in keyword:
-	# 			sub_score = 0
-	# 			sub_word = keyword.split('-')
-	# 			for sub_kwd in sub_word:
-	# 				if sub_kwd in tokenized_title:
-	# 					sub_score += (1/len(sub_word))
-
-	# 			keyword.replace('-','')
-	# 			if keyword in tokenized_title:
-	# 				s += 1
-	# 			else:
-	# 				s += sub_score
-
-	# 	return s / len(model) * 2
-
+	'''
+		generate_model_format(self, model) identifies if the model if one of the three following format:
+			'[a-z]+\d+','[a-z]+ \d+', or '[a-z]+-\d+'.
+			If the model in one of the three format, then the other two format will be generated 
+			and stored in a list, to be used to do the matching with the listings
+		Input:
+			@ model: A model of a product
+		Output:
+			@ generated_model: A list, either contained two Strings, or empty if the model does not
+				satisfy any of the above format
+	'''
 	def generate_model_format(self, model):
 		generated_model = []
 		pattern_index = -1
@@ -154,8 +145,8 @@ class Match(object):
 				roi = roi[:idx]
 
 		# split_pattern = r'[\w-]+'
-
 		# return set(re.findall(split_pattern, roi))
+		
 		return roi
 
 
